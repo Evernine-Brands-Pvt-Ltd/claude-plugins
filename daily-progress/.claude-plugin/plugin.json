@@ -1,0 +1,8 @@
+{
+  "name": "daily-progress",
+  "description": "Generate an end-of-day progress digest from the day's git commits and Claude session transcripts — 5-10 management-facing bullets plus a pace metric.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Evernine Brands"
+  }
+}
