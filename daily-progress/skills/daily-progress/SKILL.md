@@ -52,13 +52,10 @@ trace to a commit or a session request in the gathered material.
      machines — never hardcode an absolute path.
 
 5. **Publish to Notion — upsert by Date** (one row per day, never duplicate).
-   *Optional — only if a Notion MCP is connected.* If no Notion is available,
-   skip this step silently; the local digest + the chat output are enough.
-   Target the "Daily Progress" database whose data source is given by the
-   `$DAILY_PROGRESS_NOTION_DS` env var; if it is unset, ask the user for the
-   data-source URL (or `notion-search` for a "Daily Progress" database) the
-   first time, then proceed. Run `/mcp` → "notion" to authorise if the tools
-   aren't loaded.
+   *Optional.* Decide the path by what's available:
+
+   **(a) Notion MCP connected AND a data source known** (env var
+   `$DAILY_PROGRESS_NOTION_DS` set, or the user gave a URL earlier) → publish:
    - **First, look for an existing row for this Date** — `notion-search` /
      `notion-fetch` the data source and match the Date title.
    - **If a row exists → overwrite it in place:** `notion-update-page` with
@@ -66,9 +63,31 @@ trace to a commit or a session request in the gathered material.
      bullets) + `command: update_properties` (refresh Headline/Commits/Files).
      This wipes the old points and rewrites — no second row.
    - **If no row exists → create one:** `notion-create-pages` under the data
-     source.
+     source. If the "Daily Progress" database itself doesn't exist yet, offer
+     to create it with `notion-create-database` using the schema below.
    - Headline = 3-6 word summary. Date, Commits, Files come from the gather
      script's metrics; the 5-10 bullets + Pace line go in the page body.
+
+   **(b) Notion MCP connected but no data source known** → `notion-search` for
+   a "Daily Progress" database; if found, confirm and use it. If none, offer to
+   create one (schema below), then publish. Remember the data source for next
+   time (tell the user to set `DAILY_PROGRESS_NOTION_DS` so it's automatic).
+
+   **(c) No Notion MCP connected** → still finish (local file + chat output are
+   complete on their own), then print the **one-time setup brief** below so the
+   user can turn on syncing. Print it once; don't nag every run.
+
+   ```
+   📋 Optional: sync these digests to a Notion board (team command center)
+     1. Need a Notion account — free at https://notion.so (any workspace works).
+     2. Connect Notion to Claude Code: run /mcp, pick "notion", and authorise
+        in the browser. (One time per machine.)
+     3. Re-run /daily-progress. I'll find or create a "Daily Progress"
+        database and start upserting one row per day.
+     4. To always target a shared team board, set the env var
+        DAILY_PROGRESS_NOTION_DS to that database's data-source id/URL
+        (ask whoever owns the team board for it).
+   ```
 
 6. **Print the bullets in chat** too, so the user can paste them straight into
    a standup / Slack / status update.

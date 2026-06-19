@@ -28,4 +28,4 @@ Or auto-enable for everyone by adding this to a shared `.claude/settings.json`:
 
 | Plugin | What it does |
 |---|---|
-| `daily-progress` | End-of-day progress digest from the day's git commits + Claude session transcripts → 5-10 management-facing bullets + pace metric, saved locally and published to Notion. Invoke `/daily-progress`. |
+| `daily-progress` | End-of-day progress digest from the day's git commits + Claude session transcripts → 5-10 management-facing bullets + pace metric, saved locally. Invoke `/daily-progress`. Optionally syncs each day to a Notion board — if no Notion is connected it prints a one-time setup brief (create a free Notion account → `/mcp` connect → re-run). Point it at a shared team board with `DAILY_PROGRESS_NOTION_DS`. |
