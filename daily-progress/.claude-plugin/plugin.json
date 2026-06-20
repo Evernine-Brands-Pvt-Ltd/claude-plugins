@@ -1,7 +1,7 @@
 {
   "name": "daily-progress",
-  "description": "Generate an end-of-day progress digest from the day's git commits and Claude session transcripts \u2014 5-10 management-facing bullets plus a pace metric.",
-  "version": "1.2.0",
+  "description": "Generate an end-of-day progress digest from the day's git commits and Claude session transcripts — a plain-language summary (objective, what we did, why it matters) plus a separate technical section for developers and a pace metric.",
+  "version": "1.2.1",
   "author": {
     "name": "Evernine Brands"
   }

@@ -7,7 +7,7 @@
     {
       "name": "daily-progress",
       "source": "./daily-progress",
-      "description": "Generate an end-of-day progress digest from the day's git commits and Claude session transcripts — 5-10 management-facing bullets plus a pace metric, saved locally and optionally published to Notion."
+      "description": "Generate an end-of-day progress digest from the day's git commits and Claude session transcripts — a plain-language summary (objective, what we did, why it matters) for any reader plus a separate technical section for developers and a pace metric, saved locally and optionally published to Notion."
     }
   ]
 }
